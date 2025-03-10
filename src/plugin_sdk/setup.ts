@@ -53,16 +53,17 @@ const render = (
     app.provide('useEvAppConigStore',EvAppConigStore)
 
     // 初始化SDK配置
-    sdk.pluginAlias = pluginJson.plugin_alias
-    sdk.callPluginCallBack = props.CallPluginApi
-    sdk.selectEsConnId = props.GetSelectEsConnID()
-    sdk.linkOptCallBack = props.LinkOptAction
-    sdk.evRouter = props.store.router
+    sdk.setPluginAlias = pluginJson.plugin_alias
+    sdk.setCallPluginCallBack = props.CallPluginApi
+    sdk.setSelectEsConnId = props.GetSelectEsConnID()
+    sdk.setLinkOptCallBack = props.LinkOptAction
+    sdk.setEvRouter = props.store.router
 
     // 设置SDK的频道相关方法
-    sdk.subToChannel = props.SubToChannel
-    sdk.callToChannel = props.CallToChannel
-    sdk.unSubscribeToChannel = props.UnSubscribeToChannel
+    sdk.setSubToChannel = props.SubToChannel
+    sdk.setCallToChannel = props.CallToChannel
+    sdk.setUnSubscribeToChannel = props.UnSubscribeToChannel
+    sdk.setGetUserIdCb = props.getUserId
 
     // 获取国际化消息配置
     let i18nMessage = props.GetI18nMessage()

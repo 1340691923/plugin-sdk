@@ -50,53 +50,125 @@ var PluginSDK = /** @class */ (function () {
     function PluginSDK() {
         var _this = this;
         // 插件的唯一标识符
-        this.pluginAlias = '';
+        this._pluginAlias = '';
         // 当前选中的ES连接ID
-        this.selectEsConnId = 0;
+        this._selectEsConnId = 0;
         // Vue路由实例
-        this.evRouter = {};
+        this._evRouter = {};
         // 初始化插件API调用回调，返回空对象
-        this.callPluginCallBack = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+        this._callPluginCallBack = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, ({})];
         }); }); };
         // 初始化链接操作回调，返回空对象
-        this.linkOptCallBack = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+        this._linkOptCallBack = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, ({})];
         }); }); };
         // 初始化订阅频道方法为空函数
-        this.subToChannel = function () { };
+        this._subToChannel = function () { };
         // 初始化发送消息方法为空函数
-        this.callToChannel = function () { };
+        this._callToChannel = function () { };
         // 初始化取消订阅方法为空函数
-        this.unSubscribeToChannel = function () { };
+        this._unSubscribeToChannel = function () { };
+        this._getUserId = function () { return 0; };
     }
+    Object.defineProperty(PluginSDK, "instance", {
+        // 处理链接操作的回调函数
+        set: function (value) {
+            this._instance = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setPluginAlias", {
+        set: function (value) {
+            this._pluginAlias = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setSelectEsConnId", {
+        set: function (value) {
+            this._selectEsConnId = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setEvRouter", {
+        set: function (value) {
+            this._evRouter = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setCallPluginCallBack", {
+        set: function (value) {
+            this._callPluginCallBack = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setLinkOptCallBack", {
+        set: function (value) {
+            this._linkOptCallBack = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setSubToChannel", {
+        set: function (value) {
+            this._subToChannel = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setCallToChannel", {
+        set: function (value) {
+            this._callToChannel = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setUnSubscribeToChannel", {
+        set: function (value) {
+            this._unSubscribeToChannel = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(PluginSDK.prototype, "setGetUserIdCb", {
+        set: function (value) {
+            this._getUserId = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
     // 获取SDK单例实例的静态方法
     PluginSDK.getInstance = function () {
         // 如果实例不存在则创建新实例
-        if (!PluginSDK.instance) {
-            PluginSDK.instance = new PluginSDK();
+        if (!PluginSDK._instance) {
+            PluginSDK._instance = new PluginSDK();
         }
         // 返回单例实例
-        return PluginSDK.instance;
+        return PluginSDK._instance;
     };
     // 订阅指定频道的消息
     PluginSDK.prototype.SubToChannel = function (channel, msgCb) {
-        this.subToChannel(channel, msgCb);
+        this._subToChannel(channel, msgCb);
     };
     // 向指定频道发送消息
     PluginSDK.prototype.CallToChannel = function (channel, msg) {
-        this.callToChannel(channel, msg);
+        this._callToChannel(channel, msg);
     };
     // 取消指定频道的订阅
     PluginSDK.prototype.UnSubscribeToChannel = function (channel) {
-        this.unSubscribeToChannel(channel);
+        this._unSubscribeToChannel(channel);
     };
     // 调用当前插件的API
     PluginSDK.prototype.CallPluginApi = function (req) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                req.pluginAlias = exports.sdk.pluginAlias;
-                return [2 /*return*/, this.callPluginCallBack(req)];
+                req.pluginAlias = this.getPluginAlias();
+                return [2 /*return*/, this._callPluginCallBack(req)];
             });
         });
     };
@@ -105,7 +177,7 @@ var PluginSDK = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 req.pluginAlias = pluginAlias;
-                return [2 /*return*/, this.callPluginCallBack(req)];
+                return [2 /*return*/, this._callPluginCallBack(req)];
             });
         });
     };
@@ -113,13 +185,16 @@ var PluginSDK = /** @class */ (function () {
     PluginSDK.prototype.LinkOptAction = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.linkOptCallBack()];
+                return [2 /*return*/, this._linkOptCallBack()];
             });
         });
     };
+    PluginSDK.prototype.GetUserId = function () {
+        return this._getUserId();
+    };
     // 获取当前选中的ES连接ID
     PluginSDK.prototype.GetSelectEsConnID = function () {
-        return this.selectEsConnId;
+        return this._selectEsConnId;
     };
     // 检查当前是否为移动设备
     PluginSDK.prototype.IsMobile = function () {
@@ -127,7 +202,7 @@ var PluginSDK = /** @class */ (function () {
     };
     // 获取路由实例
     PluginSDK.prototype.getRouter = function () {
-        return this.evRouter;
+        return this._evRouter;
     };
     // 检查当前是否为暗色主题
     PluginSDK.prototype.isDarkTheme = function () {
@@ -151,6 +226,9 @@ var PluginSDK = /** @class */ (function () {
     PluginSDK.prototype.getEventBus = function () {
         return bus_1.bus;
     };
+    PluginSDK.prototype.getPluginAlias = function () {
+        return this._pluginAlias;
+    };
     return PluginSDK;
 }());
 exports.PluginSDK = PluginSDK;
@@ -158,7 +236,6 @@ exports.PluginSDK = PluginSDK;
 exports.sdk = PluginSDK.getInstance();
 // 导出便捷的请求方法，封装了SDK的CallPluginApi调用
 function request(req) {
-    console.log("req", req);
-    req.pluginAlias = exports.sdk.pluginAlias;
+    req.pluginAlias = exports.sdk.getPluginAlias();
     return exports.sdk.CallPluginApi(req);
 }

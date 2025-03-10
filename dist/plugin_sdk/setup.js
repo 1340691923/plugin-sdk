@@ -41,15 +41,16 @@ var render = function (props, registerPlugin, pluginJson, appVue, router, enLoca
     app.provide('useEvAppConigStoreHook', props.store.useAppStore);
     app.provide('useEvAppConigStore', ev_store_1.EvAppConigStore);
     // 初始化SDK配置
-    sdk_1.sdk.pluginAlias = pluginJson.plugin_alias;
-    sdk_1.sdk.callPluginCallBack = props.CallPluginApi;
-    sdk_1.sdk.selectEsConnId = props.GetSelectEsConnID();
-    sdk_1.sdk.linkOptCallBack = props.LinkOptAction;
-    sdk_1.sdk.evRouter = props.store.router;
+    sdk_1.sdk.setPluginAlias = pluginJson.plugin_alias;
+    sdk_1.sdk.setCallPluginCallBack = props.CallPluginApi;
+    sdk_1.sdk.setSelectEsConnId = props.GetSelectEsConnID();
+    sdk_1.sdk.setLinkOptCallBack = props.LinkOptAction;
+    sdk_1.sdk.setEvRouter = props.store.router;
     // 设置SDK的频道相关方法
-    sdk_1.sdk.subToChannel = props.SubToChannel;
-    sdk_1.sdk.callToChannel = props.CallToChannel;
-    sdk_1.sdk.unSubscribeToChannel = props.UnSubscribeToChannel;
+    sdk_1.sdk.setSubToChannel = props.SubToChannel;
+    sdk_1.sdk.setCallToChannel = props.CallToChannel;
+    sdk_1.sdk.setUnSubscribeToChannel = props.UnSubscribeToChannel;
+    sdk_1.sdk.setGetUserIdCb = props.getUserId;
     // 获取国际化消息配置
     var i18nMessage = props.GetI18nMessage();
     // 合并本地和远程的语言配置

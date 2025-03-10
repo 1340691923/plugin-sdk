@@ -1,6 +1,6 @@
 {
   "name": "@elasticview/plugin-sdk",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "用于开发ElasticView插件的sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
